@@ -1,0 +1,58 @@
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+class CallsScreen extends StatefulWidget {
+  const CallsScreen(this.switchScreen, {super.key});
+
+  final void Function(String screen) switchScreen;
+
+  @override
+  State<CallsScreen> createState() {
+    return _CallsScreenState();
+  }
+}
+
+class _CallsScreenState extends State<CallsScreen> {
+  void changeScreen() {
+    setState(() {
+      widget.switchScreen('start-screen');
+    });
+  }
+
+  @override
+  Widget build(context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              widget.switchScreen('start-screen');
+            },
+          ),
+          title: Text('Chamados',
+              style: GoogleFonts.roboto(
+                  color: const Color.fromARGB(255, 255, 255, 255),
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold)),
+          backgroundColor: const Color(0xFF717171),
+        ),
+        body: Container(
+          color: const Color(0xFF282828),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('Tela de Chamados',
+                    style: GoogleFonts.roboto(
+                        color: const Color.fromARGB(255, 255, 255, 255),
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold)),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
