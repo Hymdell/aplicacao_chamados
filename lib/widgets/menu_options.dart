@@ -12,7 +12,7 @@ class MenuOptions extends StatelessWidget {
   final void Function() onPressed;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(context) {
     return OnHoverButton(
       child: ElevatedButton.icon(
         onPressed: () {

@@ -32,7 +32,6 @@ class _MenuState extends State<Menu> {
   void switchScreen(String screen) {
     setState(() {
       activeScreen = screen;
-      print('mudou para $screen');
     });
   }
 
