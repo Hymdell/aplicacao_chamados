@@ -1,11 +1,7 @@
-import 'package:aplicacao_chamados/screens/calls_screen.dart';
-import 'package:aplicacao_chamados/screens/employees_screen.dart';
-import 'package:aplicacao_chamados/screens/goals_screen.dart';
-import 'package:aplicacao_chamados/screens/products_screen.dart';
-import 'package:aplicacao_chamados/screens/sales_screen.dart';
-import 'package:aplicacao_chamados/screens/services_screen.dart';
-import 'package:aplicacao_chamados/screens/start_screen.dart';
+import 'package:aplicacao_chamados/widgets/geral_app_bar.dart';
+import 'package:aplicacao_chamados/widgets/menu_buttons.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Menu extends StatefulWidget {
   const Menu({super.key});
@@ -19,16 +15,6 @@ class Menu extends StatefulWidget {
 class _MenuState extends State<Menu> {
   var activeScreen = 'start-screen';
 
-  final Map<String, Widget Function(Function(String))> screens = {
-    'start-screen': (switchScreen) => StartScreen(switchScreen),
-    'sales-screen': (switchScreen) => SalesScreen(switchScreen),
-    'calls-screen': (switchScreen) => CallsScreen(switchScreen),
-    'employees-screen': (switchScreen) => EmployeesScreen(switchScreen),
-    'goals-screen': (switchScreen) => GoalsScreen(switchScreen),
-    'products-screen': (switchScreen) => ProductsScreen(switchScreen),
-    'services-screen': (switchScreen) => ServicesScreen(switchScreen),
-  };
-
   void switchScreen(String screen) {
     setState(() {
       activeScreen = screen;
@@ -37,7 +23,78 @@ class _MenuState extends State<Menu> {
 
   @override
   Widget build(context) {
-    return screens[activeScreen]?.call(switchScreen) ??
-        StartScreen(switchScreen);
+    return MaterialApp(
+      home: Scaffold(
+        backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
+        appBar: GeralAppBar(
+          'Menu Inicial',
+          AppBar(),
+        ),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  MenuButtons(
+                    'Vendas',
+                    const Icon(Icons.shopping_basket_rounded),
+                    () {
+                      switchScreen('sales-screen');
+                    },
+                  ),
+                  const SizedBox(width: 20),
+                  MenuButtons(
+                    'Chamados',
+                    const Icon(Icons.computer_rounded),
+                    () {
+                      switchScreen('calls-screen');
+                    },
+                  ),
+                  const SizedBox(width: 20),
+                  MenuButtons(
+                    'Funcionários',
+                    const Icon(Icons.groups_rounded),
+                    () {
+                      switchScreen('employees-screen');
+                    },
+                  ),
+                ],
+              ),
+              const SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  MenuButtons(
+                    'Metas',
+                    const Icon(Icons.auto_graph_rounded),
+                    () {
+                      switchScreen('goals-screen');
+                    },
+                  ),
+                  const SizedBox(width: 20),
+                  MenuButtons(
+                    'Produtos',
+                    const Icon(Icons.warehouse_rounded),
+                    () {
+                      switchScreen('products-screen');
+                    },
+                  ),
+                  const SizedBox(width: 20),
+                  MenuButtons(
+                    'Serviços',
+                    const Icon(Icons.paste_rounded),
+                    () {
+                      switchScreen('services-screen');
+                    },
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
